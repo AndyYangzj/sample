@@ -1,16 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:uikit="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="my.sample.android.MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:id="@+id/dash_board_group"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello World!" />
+        android:layout_marginTop="18dp">
+
+        <my.sample.android.uikit.dashboard.CreditScoresDashboard
+            android:id="@+id/credit_scores_dashboard"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:background="@android:color/transparent"
+            uikit:inner_arc_progress_bar_height="180dp"
+            uikit:inner_arc_progress_bar_width="180dp"
+            uikit:tick_font_color="@color/uikit_ff999999"
+            uikit:tick_font_margin="5dp"
+            uikit:tick_font_size="10sp"
+            uikit:tick_height="12dp"
+            uikit:tick_margin_bottom="4dp"
+            uikit:tick_width="2dp" />
+
+        <my.sample.android.uikit.dashboard.ArcProgressBar
+            android:id="@+id/arc_progress_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:background="@android:color/transparent"
+            uikit:all_size="180dp"
+            uikit:angel_end="268"
+            uikit:angel_start="135"
+            uikit:below_font_size="12sp"
+            uikit:bottom_font_color="@color/uikit_ff999999"
+            uikit:bottom_font_size="10sp"
+            uikit:center_font_color="@android:color/black"
+            uikit:center_font_size="50sp"
+            uikit:stroke_width="12dp" />
+
+    </RelativeLayout>
+
+    <android.support.v7.widget.AppCompatSeekBar
+        android:id="@+id/app_compat_seek_bar"
+        android:layout_width="match_parent"
+        android:layout_marginTop="28dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/dash_board_group"
+        android:paddingBottom="12dp"
+        android:paddingEnd="24dp"
+        android:max="100"
+        android:paddingLeft="24dp"
+        android:paddingRight="24dp"
+        android:paddingStart="24dp"
+        android:paddingTop="12dp" />
 </RelativeLayout>
