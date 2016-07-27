@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="18dp">
 
-        <my.sample.android.uikit.dashboard.CreditScoresDashboard
+        <my.sample.android.uikit.widgets.dashboard.CreditScoresDashboard
             android:id="@+id/credit_scores_dashboard"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -27,7 +27,7 @@
             uikit:tick_margin_bottom="4dp"
             uikit:tick_width="2dp" />
 
-        <my.sample.android.uikit.dashboard.ArcProgressBar
+        <my.sample.android.uikit.widgets.dashboard.ArcProgressBar
             android:id="@+id/arc_progress_bar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

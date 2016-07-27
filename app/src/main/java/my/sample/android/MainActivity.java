@@ -5,8 +5,8 @@ import android.os.Bundle;
 import android.support.v7.widget.AppCompatSeekBar;
 import android.widget.SeekBar;
 
-import my.sample.android.uikit.dashboard.ArcProgressBar;
-import my.sample.android.uikit.dashboard.CreditScoresDashboard;
+import my.sample.android.uikit.widgets.dashboard.ArcProgressBar;
+import my.sample.android.uikit.widgets.dashboard.CreditScoresDashboard;
 
 public class MainActivity extends AppCompatActivity implements SeekBar.OnSeekBarChangeListener {
     private ArcProgressBar mArcProgressBar;

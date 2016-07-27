@@ -1,4 +1,4 @@
-package my.sample.android.uikit.dashboard;
+package my.sample.android.uikit.widgets.dashboard;
 
 import android.content.Context;
 import android.content.res.TypedArray;

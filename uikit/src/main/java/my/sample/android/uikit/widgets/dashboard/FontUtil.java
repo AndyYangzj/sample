@@ -1,4 +1,4 @@
-package my.sample.android.uikit.dashboard;
+package my.sample.android.uikit.widgets.dashboard;
 
 import android.graphics.Paint;
 import android.graphics.Rect;

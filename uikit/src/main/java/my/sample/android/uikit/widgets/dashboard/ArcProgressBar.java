@@ -1,4 +1,4 @@
-package my.sample.android.uikit.dashboard;
+package my.sample.android.uikit.widgets.dashboard;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -8,16 +8,18 @@ import android.graphics.Paint;
 import android.graphics.RectF;
 import android.text.TextUtils;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 
 import my.sample.android.uikit.R;
+import my.sample.android.uikit.tools.ResourcesUtil;
 
 /**
  * Created by Sunkist on 2016/4/12.
  * 弧形进度条
  */
-public class ArcProgressBar extends View implements Runnable {
+public class ArcProgressBar extends View {
     /**
      * 弧形进度的区域
      */
@@ -81,7 +83,6 @@ public class ArcProgressBar extends View implements Runnable {
 
         innerArcBarRectF.set(0 + strokeWidth / 2, 0 + strokeWidth / 2, allSize - strokeWidth / 2, allSize - strokeWidth / 2);
 
-
         centerFont.setFontSize(centerFontSize);
         centerFont.setFontColor(centerFontColor);
 
@@ -139,7 +140,7 @@ public class ArcProgressBar extends View implements Runnable {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         this.arcBarPen.setStyle(Paint.Style.STROKE);
-        this.arcBarPen.setColor(mArcProgressBarColor);
+        this.arcBarPen.setColor(Color.BLUE);
         this.arcBarPen.setStrokeCap(Paint.Cap.ROUND);
         this.arcBarPen.setStrokeWidth(this.strokeWidth);
         canvas.drawArc(innerArcBarRectF, startAngel, progressSweep, false, arcBarPen);
@@ -173,45 +174,6 @@ public class ArcProgressBar extends View implements Runnable {
     }
 
 
-    private ArcProgressBar setCenterContent(int content) {
-        if (content != 0) {
-            centerFont.setContent(String.valueOf(content));
-        }
-        return this;
-    }
-
-    public void executeAnimInvalidate() {
-        progressValue = 0;
-        if (getHandler() != null) {
-            getHandler().removeCallbacks(this);
-            getHandler().postDelayed(this, 2);
-        }
-    }
-
-    private void executeInvalidate() {
-        if (getHandler() != null) {
-            getHandler().removeCallbacks(this);
-        }
-        progressValue = progressMaxValue;
-        float ratio = progressValue / progressMaxValue;
-        progressSweep = (int) (ratio * endAngel);
-        invalidate();
-    }
-
-    @Override
-    public void run() {
-        if (progressValue <= progressMaxValue) {
-            progressValue++;
-            float ratio = progressValue / progressMaxValue;
-            progressSweep = (int) (ratio * endAngel);
-            setCenterContent((int) (mScoresMinValue + mScoresValue * ratio));
-            getHandler().postDelayed(this, 2);
-            invalidate();
-        } else {
-            getHandler().removeCallbacks(this);
-        }
-    }
-
     /**
      * 进度值
      */
@@ -220,22 +182,7 @@ public class ArcProgressBar extends View implements Runnable {
      * 进度角度
      */
     private int progressSweep;
-    /**
-     * 用户的分数值
-     */
-    private int mScoresValue;
-    /**
-     * 最小的分数值
-     */
-    private int mScoresMinValue = 0;
     private int progressMaxValue = 100;
-
-    /**
-     * 设置信用分数
-     */
-    public void executeAnim(int progressValue) {
-
-    }
 
     private int getDpValue(int w) {
         return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, w, getContext().getResources().getDisplayMetrics());
@@ -243,9 +190,13 @@ public class ArcProgressBar extends View implements Runnable {
 
     public void setProgress(int progress) {
         this.progressValue = progress;
+        float ratio = progressValue / progressMaxValue;
+        progressSweep = (int) (ratio * endAngel);
+        Log.d("ProgressBarValue", "" + progressSweep);
+        this.invalidate();
     }
 
     public void setMaxProgress(int maxProgress) {
-
+        this.progressMaxValue = maxProgress;
     }
 }
