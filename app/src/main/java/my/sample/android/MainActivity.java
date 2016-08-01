@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity implements SeekBar.OnSeekBar
     @Override
     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
         mArcProgressBar.setProgress(progress);
-        mCreditScoresDashboard.setProgress(progress);
+        mCreditScoresDashboard.setProgressValue(progress, seekBar.getMax());
     }
 
     @Override

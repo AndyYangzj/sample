@@ -76,43 +76,13 @@ public class CompressPhotoActivity extends AppCompatActivity implements View.OnC
         }
     }
 
-    private static int SCREENT_WIDTH;
-    private static int SCREENT_HEIGHT;
-
-    public static Point getScreenPoint(Context context) {
-        Display display = ((WindowManager) context.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
-        Point size = new Point();
-        display.getSize(size);
-        return size;
-    }
-
-    public static int getScreenWidth(Context context) {
-        if (SCREENT_WIDTH == 0) {
-            SCREENT_WIDTH = getScreenPoint(context).x;
-        }
-        return SCREENT_WIDTH;
-    }
-
-    public static int getScreenHeight(Context context) {
-        if (SCREENT_HEIGHT == 0) {
-            SCREENT_HEIGHT = getScreenPoint(context).y;
-        }
-        return SCREENT_HEIGHT;
-    }
-
-    /**
-     * 照片最大150KB
-     */
-    private final long PHOTO_MAX_SIZE = 153600;
-
     private void choseImage() {
         if (mChosedImage.exists()) {
             photo.setImageBitmap(BitmapFactory.decodeFile(mChosedImage.getAbsolutePath()));
-            Bitmap photoCopy = createThumbImage(mChosedImage.getAbsolutePath(), 800,800);
+            Bitmap photoCopy = createThumbImage(mChosedImage.getAbsolutePath(), 800, 800);
             saveBitmap(mChosedImage.getPath(), photoCopy);
             try {
-                photoSize.setText("图片大小->" + convertFileSize(getFileSize(mChosedImage))
-                        + "\n压缩后大小->" + convertFileSize(getFileSize(mChosedImage)));
+                photoSize.setText("\n压缩后大小->" + convertFileSize(getFileSize(mChosedImage)));
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -214,7 +184,7 @@ public class CompressPhotoActivity extends AppCompatActivity implements View.OnC
 
     /**
      * 不创建文件
-     *
+     *n
      * @param ctx
      * @return
      */
@@ -302,30 +272,7 @@ public class CompressPhotoActivity extends AppCompatActivity implements View.OnC
         opts.inSampleSize = sampleSize;
         Bitmap decodeFile = BitmapFactory.decodeFile(path, opts);
 
-//        ExifOrientation orientation = ImageUtil.getOrientation(path);
-//        cb.getSize(srcWidth, srcHeight, sampleW, sampleH, 1 / (float) sampleSize, orientation);
-//        if (orientation != null && (orientation.flip || orientation.angle != 0)) {
-//            // 需要旋转
-//            Bitmap rotateFile = ImageUtil.rotateBitmap(decodeFile, orientation);
-//            if (rotateFile != decodeFile) {
-//                decodeFile.recycle();
-//            }
-//            decodeFile = rotateFile;
-//
-//        }
         return decodeFile;
     }
 
-    public static class ExifOrientation {
-
-        public boolean flip;
-
-        public int angle;
-
-        public ExifOrientation(boolean flip, int angle) {
-            super();
-            this.flip = flip;
-            this.angle = angle;
-        }
-    }
 }

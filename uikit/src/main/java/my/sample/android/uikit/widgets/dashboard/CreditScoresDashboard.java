@@ -260,56 +260,19 @@ public class CreditScoresDashboard extends View {
     /**
      * 信用分的最大值，默认300-900
      */
-    private int minScores = 300, maxScores = 100;
+    private int minScores = 0, maxScores = 100;
     private ArrayList<String> scoresRange = new ArrayList<>(4);
 
-    /**
-     * 设置最小分数和最大分数区间
-     *
-     * @param minScores
-     * @param maxSocres
-     */
-    public CreditScoresDashboard setScoresRange(int minScores, int maxSocres, int scores) {
-
-        this.minScores = minScores;
-        this.maxScores = maxSocres;
-        scoresRange.clear();
-        int scoresAvg = (maxScores - minScores) / 5;
-
-        int SocresRangeOne = minScores + scoresAvg;
-        scoresRange.add(scores < SocresRangeOne ? String.valueOf(SocresRangeOne) : "");
-
-        int SocresRangeTwo = minScores + scoresAvg * 2;
-        scoresRange.add(scores < SocresRangeTwo ? String.valueOf(SocresRangeTwo) : "");
-
-        int SocresRangeThree = minScores + scoresAvg * 3;
-        scoresRange.add(scores < SocresRangeThree ? String.valueOf(SocresRangeThree) : "");
-
-        int SocresRangeFour = minScores + scoresAvg * 4;
-        scoresRange.add(scores < SocresRangeFour ? String.valueOf(SocresRangeFour) : "");
-
-//        int SocresRangeOne = minScores + scoresAvg;
-//        scoresRange.add(String.valueOf(SocresRangeOne));
-//
-//        int SocresRangeTwo = minScores + scoresAvg * 2;
-//        scoresRange.add(String.valueOf(SocresRangeTwo));
-//
-//        int SocresRangeThree = minScores + scoresAvg * 3;
-//        scoresRange.add(String.valueOf(SocresRangeThree));
-//
-//        int SocresRangeFour = minScores + scoresAvg * 4;
-//        scoresRange.add(String.valueOf(SocresRangeFour));
-        return this;
-    }
 
     private int mProgress;
 
     public void setProgress(int progress) {
         this.mProgress = progress;
+        invalidate();
     }
 
     public void setMaxProgress(int maxProgrexx) {
-
+        this.maxScores = maxProgrexx;
     }
 }
 
