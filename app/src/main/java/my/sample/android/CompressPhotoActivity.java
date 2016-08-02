@@ -27,6 +27,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.channels.FileChannel;
 
+import my.sample.android.uikit.tools.UiUtils;
+
 public class CompressPhotoActivity extends AppCompatActivity implements View.OnClickListener {
 
     private ImageView photo;
@@ -78,11 +80,11 @@ public class CompressPhotoActivity extends AppCompatActivity implements View.OnC
 
     private void choseImage() {
         if (mChosedImage.exists()) {
-            photo.setImageBitmap(BitmapFactory.decodeFile(mChosedImage.getAbsolutePath()));
-            Bitmap photoCopy = createThumbImage(mChosedImage.getAbsolutePath(), 800, 800);
+            Bitmap photoCopy = createThumbImage(mChosedImage.getAbsolutePath(), UiUtils.getScreenWidth(this), UiUtils.getScreenHeight(this));
+            photo.setImageBitmap(photoCopy);
             saveBitmap(mChosedImage.getPath(), photoCopy);
             try {
-                photoSize.setText("\n压缩后大小->" + convertFileSize(getFileSize(mChosedImage)));
+                photoSize.setText(getFileSize(mChosedImage) + "\n压缩后大小->" + convertFileSize(getFileSize(mChosedImage)));
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -184,7 +186,8 @@ public class CompressPhotoActivity extends AppCompatActivity implements View.OnC
 
     /**
      * 不创建文件
-     *n
+     * n
+     *
      * @param ctx
      * @return
      */
@@ -259,9 +262,7 @@ public class CompressPhotoActivity extends AppCompatActivity implements View.OnC
 
         int sampleW = (int) Math.ceil(srcWidth / (float) sampleSize);
         int sampleH = (int) Math.ceil(srcHeight / (float) sampleSize);
-        while (sampleW > 800 || sampleH > 800) {
-            // 最后缩放出来的的图一定要小于3000
-            // 否则可能oom
+        while (sampleW > 1000 || sampleH > 1000) {
             sampleSize *= 2;
             sampleW = (int) Math.ceil(srcWidth / (float) sampleSize);
             sampleH = (int) Math.ceil(srcHeight / (float) sampleSize);

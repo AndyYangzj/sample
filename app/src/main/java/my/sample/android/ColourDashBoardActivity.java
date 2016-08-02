@@ -8,7 +8,7 @@ import android.widget.SeekBar;
 import my.sample.android.uikit.widgets.dashboard.ArcProgressBar;
 import my.sample.android.uikit.widgets.dashboard.CreditScoresDashboard;
 
-public class MainActivity extends AppCompatActivity implements SeekBar.OnSeekBarChangeListener {
+public class ColourDashBoardActivity extends AppCompatActivity implements SeekBar.OnSeekBarChangeListener {
     private ArcProgressBar mArcProgressBar;
     private CreditScoresDashboard mCreditScoresDashboard;
     private AppCompatSeekBar mSeekBar;
